@@ -10,7 +10,7 @@ const CartContext=createContext({
 function cartReducer(state, action ){
     if(action.type==='ADD_ITEM')
     {
-        const existingCartItemIndex=state.item.findIndex((item)=> item.id ===action.item.id)
+        const existingCartItemIndex=state.items.findIndex((item)=> item.id ===action.item.id)
         const updatedItems=[...state.items];
 
         if(existingCartItemIndex>-1)
@@ -52,7 +52,7 @@ function cartReducer(state, action ){
 export  function CartContextProvider({children}) {
    const [cart, dispatchCartAction]=useReducer(cartReducer, {items:[] });
    
-   const CartContext={
+   const CartContextt={
     items: cart.items,
     addItem,
     removeItem
@@ -66,8 +66,8 @@ export  function CartContextProvider({children}) {
    {
     dispatchCartAction({type: "REMOVE_ITEM", id})
    }
-   console.log(CartContext)
-   return <CartContext.Provider value={CartContext}>
+  console.log(CartContextt)
+   return <CartContext.Provider value={CartContextt}>
         {children}
     </CartContext.Provider>
 }
